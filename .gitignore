@@ -1,0 +1,17 @@
+# Ignore virtual environments
+venv/
+.venv/
+
+# Ignore dataset folder
+datasets/
+
+
+# Ignore environment variables
+.env
+
+# Ignore Jupyter checkpoints
+.ipynb_checkpoints/
+
+
+# Ignore logs
+*.log
