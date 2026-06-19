@@ -1,0 +1,102 @@
+{
+  "scenes": [
+    {
+      "id": "office",
+      "label": "Corporate Office",
+      "anchors": [
+        "pc1",
+        "pc2",
+        "laptop_ceo"
+      ]
+    },
+    {
+      "id": "datacenter",
+      "label": "Data Center",
+      "anchors": [
+        "firewall1",
+        "db1",
+        "mail_server"
+      ]
+    },
+    {
+      "id": "wan_portal",
+      "label": "WAN Gateway",
+      "anchors": [
+        "edge_router"
+      ]
+    },
+    {
+      "id": "globe",
+      "label": "Global Map",
+      "anchors": [
+        "internet"
+      ]
+    }
+  ],
+  "anchors": {
+    "pc1": {
+      "type": "workstation",
+      "pos": [
+        1,
+        0,
+        2
+      ]
+    },
+    "pc2": {
+      "type": "workstation",
+      "pos": [
+        2,
+        0,
+        2
+      ]
+    },
+    "laptop_ceo": {
+      "type": "laptop",
+      "pos": [
+        0,
+        0,
+        1
+      ]
+    },
+    "firewall1": {
+      "type": "firewall",
+      "pos": [
+        1,
+        0,
+        5
+      ]
+    },
+    "db1": {
+      "type": "database",
+      "pos": [
+        2,
+        0,
+        5
+      ]
+    },
+    "mail_server": {
+      "type": "server",
+      "pos": [
+        0,
+        0,
+        5
+      ]
+    },
+    "edge_router": {
+      "type": "router",
+      "pos": [
+        1,
+        0,
+        7
+      ]
+    },
+    "internet": {
+      "type": "world",
+      "pos": [
+        0,
+        0,
+        10
+      ]
+    }
+  }
+}

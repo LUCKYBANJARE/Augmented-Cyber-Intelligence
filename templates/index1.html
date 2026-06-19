@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Packet Stream</title>
+<script src="//cdnjs.cloudflare.com/ajax/libs/socket.io/4.6.1/socket.io.min.js"></script>
+</head>
+<body>
+<h1>Live Packet Stream</h1>
+<ul id="packets"></ul>
+
+<script>
+    const socket = io();
+    const ul = document.getElementById('packets');
+
+    socket.on('new_packet', (packet) => {
+        const li = document.createElement('li');
+        li.textContent = `${packet.src} → ${packet.dst}: ${packet.info}`;
+        ul.appendChild(li);
+    });
+</script>
+</body>
+</html>

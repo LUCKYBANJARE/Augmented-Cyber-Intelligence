@@ -1,0 +1,1014 @@
+{
+  "scenes": [
+    {
+      "id": "office",
+      "label": "Corporate Office",
+      "anchors": [
+        "pc1",
+        "pc2",
+        "laptop_ceo"
+      ]
+    },
+    {
+      "id": "datacenter",
+      "label": "Data Center",
+      "anchors": [
+        "firewall1",
+        "db1",
+        "mail_server"
+      ]
+    },
+    {
+      "id": "wan_portal",
+      "label": "WAN Gateway",
+      "anchors": [
+        "edge_router"
+      ]
+    },
+    {
+      "id": "globe",
+      "label": "Global Map",
+      "anchors": [
+        "internet"
+      ]
+    }
+  ],
+  "anchors": {
+    "pc1": {
+      "type": "workstation",
+      "pos": [
+        1,
+        0,
+        2
+      ]
+    },
+    "pc2": {
+      "type": "workstation",
+      "pos": [
+        2,
+        0,
+        2
+      ]
+    },
+    "laptop_ceo": {
+      "type": "laptop",
+      "pos": [
+        0,
+        0,
+        1
+      ]
+    },
+    "firewall1": {
+      "type": "firewall",
+      "pos": [
+        1,
+        0,
+        5
+      ]
+    },
+    "db1": {
+      "type": "database",
+      "pos": [
+        2,
+        0,
+        5
+      ]
+    },
+    "mail_server": {
+      "type": "server",
+      "pos": [
+        0,
+        0,
+        5
+      ]
+    },
+    "edge_router": {
+      "type": "router",
+      "pos": [
+        1,
+        0,
+        7
+      ]
+    },
+    "internet": {
+      "type": "world",
+      "pos": [
+        0,
+        0,
+        10
+      ]
+    },
+    "http": {
+      "type": "service",
+      "pos": [
+        0,
+        0,
+        15
+      ]
+    },
+    "https": {
+      "type": "service",
+      "pos": [
+        2,
+        0,
+        15
+      ]
+    },
+    "ftp": {
+      "type": "service",
+      "pos": [
+        4,
+        0,
+        15
+      ]
+    },
+    "ssh": {
+      "type": "service",
+      "pos": [
+        6,
+        0,
+        15
+      ]
+    },
+    "telnet": {
+      "type": "service",
+      "pos": [
+        8,
+        0,
+        15
+      ]
+    },
+    "smtp": {
+      "type": "service",
+      "pos": [
+        10,
+        0,
+        15
+      ]
+    },
+    "pop3": {
+      "type": "service",
+      "pos": [
+        12,
+        0,
+        15
+      ]
+    },
+    "imap": {
+      "type": "service",
+      "pos": [
+        14,
+        0,
+        15
+      ]
+    },
+    "dns": {
+      "type": "service",
+      "pos": [
+        16,
+        0,
+        15
+      ]
+    },
+    "dhcp": {
+      "type": "service",
+      "pos": [
+        18,
+        0,
+        15
+      ]
+    },
+    "ldap": {
+      "type": "service",
+      "pos": [
+        20,
+        0,
+        15
+      ]
+    },
+    "snmp": {
+      "type": "service",
+      "pos": [
+        22,
+        0,
+        15
+      ]
+    },
+    "rdp": {
+      "type": "service",
+      "pos": [
+        24,
+        0,
+        15
+      ]
+    },
+    "smb": {
+      "type": "service",
+      "pos": [
+        26,
+        0,
+        15
+      ]
+    },
+    "nfs": {
+      "type": "service",
+      "pos": [
+        28,
+        0,
+        15
+      ]
+    },
+    "mysql": {
+      "type": "service",
+      "pos": [
+        30,
+        0,
+        15
+      ]
+    },
+    "postgresql": {
+      "type": "service",
+      "pos": [
+        32,
+        0,
+        15
+      ]
+    },
+    "oracle": {
+      "type": "service",
+      "pos": [
+        34,
+        0,
+        15
+      ]
+    },
+    "mssql": {
+      "type": "service",
+      "pos": [
+        36,
+        0,
+        15
+      ]
+    },
+    "mongodb": {
+      "type": "service",
+      "pos": [
+        38,
+        0,
+        15
+      ]
+    },
+    "redis": {
+      "type": "service",
+      "pos": [
+        40,
+        0,
+        15
+      ]
+    },
+    "elastic": {
+      "type": "service",
+      "pos": [
+        0,
+        0,
+        17
+      ]
+    },
+    "kafka": {
+      "type": "service",
+      "pos": [
+        2,
+        0,
+        17
+      ]
+    },
+    "mqtt": {
+      "type": "service",
+      "pos": [
+        4,
+        0,
+        17
+      ]
+    },
+    "rpc": {
+      "type": "service",
+      "pos": [
+        6,
+        0,
+        17
+      ]
+    },
+    "ntp": {
+      "type": "service",
+      "pos": [
+        8,
+        0,
+        17
+      ]
+    },
+    "tftp": {
+      "type": "service",
+      "pos": [
+        10,
+        0,
+        17
+      ]
+    },
+    "sip": {
+      "type": "service",
+      "pos": [
+        12,
+        0,
+        17
+      ]
+    },
+    "h323": {
+      "type": "service",
+      "pos": [
+        14,
+        0,
+        17
+      ]
+    },
+    "rtsp": {
+      "type": "service",
+      "pos": [
+        16,
+        0,
+        17
+      ]
+    },
+    "rtmp": {
+      "type": "service",
+      "pos": [
+        18,
+        0,
+        17
+      ]
+    },
+    "vnc": {
+      "type": "service",
+      "pos": [
+        20,
+        0,
+        17
+      ]
+    },
+    "x11": {
+      "type": "service",
+      "pos": [
+        22,
+        0,
+        17
+      ]
+    },
+    "icmp": {
+      "type": "service",
+      "pos": [
+        24,
+        0,
+        17
+      ]
+    },
+    "bgp": {
+      "type": "service",
+      "pos": [
+        26,
+        0,
+        17
+      ]
+    },
+    "ospf": {
+      "type": "service",
+      "pos": [
+        28,
+        0,
+        17
+      ]
+    },
+    "rip": {
+      "type": "service",
+      "pos": [
+        30,
+        0,
+        17
+      ]
+    },
+    "isakmp": {
+      "type": "service",
+      "pos": [
+        32,
+        0,
+        17
+      ]
+    },
+    "ikev2": {
+      "type": "service",
+      "pos": [
+        34,
+        0,
+        17
+      ]
+    },
+    "pptp": {
+      "type": "service",
+      "pos": [
+        36,
+        0,
+        17
+      ]
+    },
+    "l2tp": {
+      "type": "service",
+      "pos": [
+        38,
+        0,
+        17
+      ]
+    },
+    "gre": {
+      "type": "service",
+      "pos": [
+        40,
+        0,
+        17
+      ]
+    },
+    "ipsec": {
+      "type": "service",
+      "pos": [
+        0,
+        0,
+        19
+      ]
+    },
+    "ssl": {
+      "type": "service",
+      "pos": [
+        2,
+        0,
+        19
+      ]
+    },
+    "tls": {
+      "type": "service",
+      "pos": [
+        4,
+        0,
+        19
+      ]
+    },
+    "kerberos": {
+      "type": "service",
+      "pos": [
+        6,
+        0,
+        19
+      ]
+    },
+    "gopher": {
+      "type": "service",
+      "pos": [
+        8,
+        0,
+        19
+      ]
+    },
+    "whois": {
+      "type": "service",
+      "pos": [
+        10,
+        0,
+        19
+      ]
+    },
+    "finger": {
+      "type": "service",
+      "pos": [
+        12,
+        0,
+        19
+      ]
+    },
+    "daytime": {
+      "type": "service",
+      "pos": [
+        14,
+        0,
+        19
+      ]
+    },
+    "chargen": {
+      "type": "service",
+      "pos": [
+        16,
+        0,
+        19
+      ]
+    },
+    "echo": {
+      "type": "service",
+      "pos": [
+        18,
+        0,
+        19
+      ]
+    },
+    "quote": {
+      "type": "service",
+      "pos": [
+        20,
+        0,
+        19
+      ]
+    },
+    "rsync": {
+      "type": "service",
+      "pos": [
+        22,
+        0,
+        19
+      ]
+    },
+    "git": {
+      "type": "service",
+      "pos": [
+        24,
+        0,
+        19
+      ]
+    },
+    "svn": {
+      "type": "service",
+      "pos": [
+        26,
+        0,
+        19
+      ]
+    },
+    "cvs": {
+      "type": "service",
+      "pos": [
+        28,
+        0,
+        19
+      ]
+    },
+    "nntp": {
+      "type": "service",
+      "pos": [
+        30,
+        0,
+        19
+      ]
+    },
+    "irc": {
+      "type": "service",
+      "pos": [
+        32,
+        0,
+        19
+      ]
+    },
+    "xmpp": {
+      "type": "service",
+      "pos": [
+        34,
+        0,
+        19
+      ]
+    },
+    "imap4s": {
+      "type": "service",
+      "pos": [
+        36,
+        0,
+        19
+      ]
+    },
+    "pop3s": {
+      "type": "service",
+      "pos": [
+        38,
+        0,
+        19
+      ]
+    },
+    "smtps": {
+      "type": "service",
+      "pos": [
+        40,
+        0,
+        19
+      ]
+    },
+    "ldaps": {
+      "type": "service",
+      "pos": [
+        0,
+        0,
+        21
+      ]
+    },
+    "ftps": {
+      "type": "service",
+      "pos": [
+        2,
+        0,
+        21
+      ]
+    },
+    "sftp": {
+      "type": "service",
+      "pos": [
+        4,
+        0,
+        21
+      ]
+    },
+    "cups": {
+      "type": "service",
+      "pos": [
+        6,
+        0,
+        21
+      ]
+    },
+    "ipp": {
+      "type": "service",
+      "pos": [
+        8,
+        0,
+        21
+      ]
+    },
+    "snpp": {
+      "type": "service",
+      "pos": [
+        10,
+        0,
+        21
+      ]
+    },
+    "modbus": {
+      "type": "service",
+      "pos": [
+        12,
+        0,
+        21
+      ]
+    },
+    "dnp3": {
+      "type": "service",
+      "pos": [
+        14,
+        0,
+        21
+      ]
+    },
+    "iec104": {
+      "type": "service",
+      "pos": [
+        16,
+        0,
+        21
+      ]
+    },
+    "mqtts": {
+      "type": "service",
+      "pos": [
+        18,
+        0,
+        21
+      ]
+    },
+    "coap": {
+      "type": "service",
+      "pos": [
+        20,
+        0,
+        21
+      ]
+    },
+    "amqp": {
+      "type": "service",
+      "pos": [
+        22,
+        0,
+        21
+      ]
+    },
+    "radius": {
+      "type": "service",
+      "pos": [
+        24,
+        0,
+        21
+      ]
+    },
+    "diameter": {
+      "type": "service",
+      "pos": [
+        26,
+        0,
+        21
+      ]
+    },
+    "sccp": {
+      "type": "service",
+      "pos": [
+        28,
+        0,
+        21
+      ]
+    },
+    "gsm": {
+      "type": "service",
+      "pos": [
+        30,
+        0,
+        21
+      ]
+    },
+    "umts": {
+      "type": "service",
+      "pos": [
+        32,
+        0,
+        21
+      ]
+    },
+    "lte": {
+      "type": "service",
+      "pos": [
+        34,
+        0,
+        21
+      ]
+    },
+    "5g": {
+      "type": "service",
+      "pos": [
+        36,
+        0,
+        21
+      ]
+    },
+    "zigbee": {
+      "type": "service",
+      "pos": [
+        38,
+        0,
+        21
+      ]
+    },
+    "zwave": {
+      "type": "service",
+      "pos": [
+        40,
+        0,
+        21
+      ]
+    },
+    "can": {
+      "type": "service",
+      "pos": [
+        0,
+        0,
+        23
+      ]
+    },
+    "modem": {
+      "type": "service",
+      "pos": [
+        2,
+        0,
+        23
+      ]
+    },
+    "ppp": {
+      "type": "service",
+      "pos": [
+        4,
+        0,
+        23
+      ]
+    },
+    "frame_relay": {
+      "type": "service",
+      "pos": [
+        6,
+        0,
+        23
+      ]
+    },
+    "atm": {
+      "type": "service",
+      "pos": [
+        8,
+        0,
+        23
+      ]
+    },
+    "mpls": {
+      "type": "service",
+      "pos": [
+        10,
+        0,
+        23
+      ]
+    },
+    "vxlan": {
+      "type": "service",
+      "pos": [
+        12,
+        0,
+        23
+      ]
+    },
+    "geneve": {
+      "type": "service",
+      "pos": [
+        14,
+        0,
+        23
+      ]
+    },
+    "openflow": {
+      "type": "service",
+      "pos": [
+        16,
+        0,
+        23
+      ]
+    },
+    "stun": {
+      "type": "service",
+      "pos": [
+        18,
+        0,
+        23
+      ]
+    },
+    "turn": {
+      "type": "service",
+      "pos": [
+        20,
+        0,
+        23
+      ]
+    },
+    "webrtc": {
+      "type": "service",
+      "pos": [
+        22,
+        0,
+        23
+      ]
+    },
+    "http2": {
+      "type": "service",
+      "pos": [
+        24,
+        0,
+        23
+      ]
+    },
+    "quic": {
+      "type": "service",
+      "pos": [
+        26,
+        0,
+        23
+      ]
+    },
+    "dnssec": {
+      "type": "service",
+      "pos": [
+        28,
+        0,
+        23
+      ]
+    },
+    "spf": {
+      "type": "service",
+      "pos": [
+        30,
+        0,
+        23
+      ]
+    },
+    "dmarc": {
+      "type": "service",
+      "pos": [
+        32,
+        0,
+        23
+      ]
+    },
+    "dkim": {
+      "type": "service",
+      "pos": [
+        34,
+        0,
+        23
+      ]
+    },
+    "tor": {
+      "type": "service",
+      "pos": [
+        36,
+        0,
+        23
+      ]
+    },
+    "i2p": {
+      "type": "service",
+      "pos": [
+        38,
+        0,
+        23
+      ]
+    },
+    "onion": {
+      "type": "service",
+      "pos": [
+        40,
+        0,
+        23
+      ]
+    },
+    "bitcoin": {
+      "type": "service",
+      "pos": [
+        0,
+        0,
+        25
+      ]
+    },
+    "ethereum": {
+      "type": "service",
+      "pos": [
+        2,
+        0,
+        25
+      ]
+    },
+    "ipfs": {
+      "type": "service",
+      "pos": [
+        4,
+        0,
+        25
+      ]
+    },
+    "gnutella": {
+      "type": "service",
+      "pos": [
+        6,
+        0,
+        25
+      ]
+    },
+    "edonkey": {
+      "type": "service",
+      "pos": [
+        8,
+        0,
+        25
+      ]
+    },
+    "soulseek": {
+      "type": "service",
+      "pos": [
+        10,
+        0,
+        25
+      ]
+    },
+    "napster": {
+      "type": "service",
+      "pos": [
+        12,
+        0,
+        25
+      ]
+    },
+    "kazaa": {
+      "type": "service",
+      "pos": [
+        14,
+        0,
+        25
+      ]
+    },
+    "dcpp": {
+      "type": "service",
+      "pos": [
+        16,
+        0,
+        25
+      ]
+    }
+  }
+}

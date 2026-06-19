@@ -1,0 +1,425 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AR Cyber Attack Visualization</title>
+<style>
+body { margin:0; overflow:hidden; background:#111; }
+.legend { position:absolute; top:20px; right:20px; background:rgba(30,30,30,0.9); padding:10px; border-radius:8px; color:#fff; font-size:13px;}
+.legend-item { display:flex; align-items:center; margin-bottom:6px;}
+.legend-color { width:18px; height:10px; margin-right:8px; border-radius:2px; }
+</style>
+</head>
+<body>
+<div class="legend">
+  <div class="legend-item"><div class="legend-color" style="background:#4caf50"></div>Normal</div>
+  <div class="legend-item"><div class="legend-color" style="background:#ff9800"></div>Generic / Suspicious</div>
+  <div class="legend-item"><div class="legend-color" style="background:#f44336"></div>Exploits / DoS</div>
+</div>
+
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js";
+import { ARButton } from "https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/webxr/ARButton.js";
+import { io } from "https://cdn.socket.io/4.6.1/socket.io.esm.min.js";
+
+// Scene setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.01, 20);
+const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.xr.enabled = true;
+document.body.appendChild(renderer.domElement);
+document.body.appendChild(ARButton.createButton(renderer));
+scene.add(new THREE.HemisphereLight(0xffffff,0xbbbbff,1));
+
+// Nodes
+const nodes = ["TCP","UDP","HTTP","DNS","SMTP","FTP"];
+const nodeSprites = {};
+const loader = new THREE.TextureLoader();
+nodes.forEach(n=>{
+    const tex = loader.load("static/img/moodboard.png"); // default PC icon
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent:true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.set((Math.random()-0.5)*2,(Math.random()-0.5)*2,-Math.random()*2-0.5);
+    sprite.scale.set(0.4,0.4,1);
+    scene.add(sprite);
+    nodeSprites[n] = sprite;
+});
+
+// Colors & Icons
+const nodeColors = {"Normal":0x4caf50,"Generic":0xff9800,"Exploits":0xf44336};
+const tex = loader.load("/static/img/moodboard.png");
+const iconMap = {
+  "Normal": "/static/img/normal.png",
+  "Generic": "/static/img/malware.png",
+  "Exploits": "/static/img/cyber-attack.png",
+  "default": "/static/img/moodboard.png"
+};
+
+// Edges storage
+const edges = [];
+
+// SocketIO connection
+const socket = io();
+socket.on("new_packet_event", evt=>{
+    const src = nodeSprites[evt.source_node];
+    const dst = nodeSprites[evt.destination_node];
+    if(!src || !dst) return;
+
+    // Line
+    let edge = edges.find(e=>e.src===evt.source_node && e.dst===evt.destination_node);
+    if(!edge){
+        const geom = new THREE.BufferGeometry();
+        const pos = new Float32Array(6);
+        geom.setAttribute('position', new THREE.BufferAttribute(pos,3));
+        const mat = new THREE.LineBasicMaterial({ color: nodeColors[evt.attack_type] || 0xffffff });
+        const line = new THREE.Line(geom, mat);
+        scene.add(line);
+
+        // Middle icon
+        const tex = loader.load(iconMap[evt.attack_type] || iconMap["default"]);
+        const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map:tex, transparent:true }));
+        sprite.scale.set(0.4,0.4,1);
+        scene.add(sprite);
+
+        edge = {line, srcNode:evt.source_node, dstNode:evt.destination_node, icon:sprite};
+        edges.push(edge);
+    }
+
+    // Update line positions
+    const pos = edge.line.geometry.attributes.position.array;
+    pos[0]=src.position.x; pos[1]=src.position.y; pos[2]=src.position.z;
+    pos[3]=dst.position.x; pos[4]=dst.position.y; pos[5]=dst.position.z;
+    edge.line.geometry.attributes.position.needsUpdate = true;
+
+    // Update icon in middle
+    edge.icon.position.set(
+        (src.position.x + dst.position.x)/2,
+        (src.position.y + dst.position.y)/2,
+        (src.position.z + dst.position.z)/2
+    );
+    edge.line.material.color.set(nodeColors[evt.attack_type] || 0xffffff);
+});
+
+// Simple repulsion layout
+function updateLayout(){
+    nodes.forEach(n1=>{
+        nodes.forEach(n2=>{
+            if(n1!==n2){
+                const s1=nodeSprites[n1], s2=nodeSprites[n2];
+                const dx=s1.position.x-s2.position.x;
+                const dy=s1.position.y-s2.position.y;
+                const dz=s1.position.z-s2.position.z;
+                const d2=dx*dx+dy*dy+dz*dz+0.01;
+                const f=0.001/d2;
+                s1.position.x+=dx*f; s1.position.y+=dy*f; s1.position.z+=dz*f;
+            }
+        });
+    });
+}
+
+renderer.setAnimationLoop(()=>{
+    updateLayout();
+    renderer.render(scene,camera);
+});
+
+window.addEventListener("resize", ()=>{
+    camera.aspect=window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+});
+</script>
+</body>
+</html> -->
+
+
+
+
+
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AR Cyber Attack Visualization</title>
+<style>
+body { margin:0; overflow:hidden; background:#111; color:#eee; }
+.legend {
+  position:absolute; top:20px; right:20px; background:rgba(30,30,30,0.9); padding:10px 15px; border-radius:8px; font-size:13px;
+}
+.legend-item { display:flex; align-items:center; margin-bottom:6px; }
+.legend-color { width:18px; height:10px; margin-right:8px; border-radius:2px; }
+</style>
+</head>
+<body>
+<div class="legend">
+  <div class="legend-item"><div class="legend-color" style="background:#4caf50"></div>Normal</div>
+  <div class="legend-item"><div class="legend-color" style="background:#ff9800"></div>Generic / Suspicious</div>
+  <div class="legend-item"><div class="legend-color" style="background:#f44336"></div>Exploits / DoS</div>
+</div>
+
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js";
+import { ARButton } from "https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/webxr/ARButton.js";
+import { io } from "https://cdn.socket.io/4.6.1/socket.io.esm.min.js";
+
+// Scene setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.01, 20);
+const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.xr.enabled = true;
+document.body.appendChild(renderer.domElement);
+document.body.appendChild(ARButton.createButton(renderer));
+
+scene.add(new THREE.HemisphereLight(0xffffff,0xbbbbff,1));
+
+// Nodes
+const nodes = ["TCP","UDP","HTTP","DNS","SMTP","FTP"];
+const nodeSprites = {};
+const loader = new THREE.TextureLoader();
+const spacing = 1.5;
+
+// Left-to-right layout
+nodes.forEach((n,i)=>{
+    const tex = loader.load("/static/img/moodboard.png");
+    const mat = new THREE.SpriteMaterial({ map: tex, transparent:true });
+    const sprite = new THREE.Sprite(mat);
+    sprite.position.set(-3 + i*spacing, 0, 0); 
+    sprite.scale.set(0.5,0.5,1);
+    scene.add(sprite);
+    nodeSprites[n] = sprite;
+});
+
+// Colors & icons
+const nodeColors = {"Normal":0x4caf50,"Generic":0xff9800,"Exploits":0xf44336};
+const iconMap = {
+  "Normal": "/static/img/normal.png",
+  "Generic": "/static/img/malware.png",
+  "Exploits": "/static/img/cyber-attack.png",
+  "default": "/static/img/moodboard.png"
+};
+
+const edges = [];
+const socket = io();
+
+// Handle real-time packets
+socket.on("new_packet_event", evt=>{
+    const src = nodeSprites[evt.source_node];
+    const dst = nodeSprites[evt.destination_node];
+    if(!src || !dst) return;
+
+    let edge = edges.find(e=>e.srcNode===evt.source_node && e.dstNode===evt.destination_node);
+    if(!edge){
+        // Line
+        const geom = new THREE.BufferGeometry();
+        geom.setAttribute("position", new THREE.BufferAttribute(new Float32Array(6),3));
+        const mat = new THREE.LineBasicMaterial({ color: nodeColors[evt.attack_type] || 0xffffff });
+        const line = new THREE.Line(geom, mat);
+        scene.add(line);
+
+        // Middle icon
+        const tex = loader.load(iconMap[evt.attack_type] || iconMap["default"]);
+        const icon = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent:true }));
+        icon.scale.set(0.3,0.3,0.3);
+        scene.add(icon);
+
+        edge = {line, srcNode:evt.source_node, dstNode:evt.destination_node, icon};
+        edges.push(edge);
+    }
+
+    const pos = edge.line.geometry.attributes.position.array;
+    pos[0]=src.position.x; pos[1]=src.position.y; pos[2]=src.position.z;
+    pos[3]=dst.position.x; pos[4]=dst.position.y; pos[5]=dst.position.z;
+    edge.line.geometry.attributes.position.needsUpdate = true;
+
+    edge.icon.position.set(
+        (src.position.x+dst.position.x)/2,
+        (src.position.y+dst.position.y)/2,
+        (src.position.z+dst.position.z)/2
+    );
+    edge.line.material.color.set(nodeColors[evt.attack_type]);
+});
+
+// Render
+renderer.setAnimationLoop(()=>{ renderer.render(scene,camera); });
+
+// Resize
+window.addEventListener("resize", ()=>{
+    camera.aspect=window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>AR Cyber Attack Visualization</title>
+<style>
+body { margin:0; overflow:hidden; background:#111; }
+
+#ar-start-btn {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 12px 25px;
+  background: #00c853;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  font-size: 16px;
+  z-index: 9999;
+  cursor: pointer;
+}
+
+.legend {
+  position:absolute; top:20px; right:20px;
+  background:rgba(30,30,30,0.9);
+  padding:10px; border-radius:8px; color:#fff; font-size:13px;
+}
+.legend-item { display:flex; align-items:center; margin-bottom:6px; }
+.legend-color { width:18px; height:10px; margin-right:8px; border-radius:2px; }
+</style>
+</head>
+<body>
+
+<!-- AR Button -->
+<button id="ar-start-btn">Enter AR</button>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-color" style="background:#4caf50"></div>Normal</div>
+  <div class="legend-item"><div class="legend-color" style="background:#ff9800"></div>Suspicious</div>
+  <div class="legend-item"><div class="legend-color" style="background:#f44336"></div>Exploits / DoS</div>
+</div>
+
+<script type="module">
+import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.155.0/build/three.module.js";
+import { ARButton } from "https://cdn.jsdelivr.net/npm/three@0.155.0/examples/jsm/webxr/ARButton.js";
+import { io } from "https://cdn.socket.io/4.6.1/socket.io.esm.min.js";
+
+// Scene setup
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.01, 20);
+const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.xr.enabled = true;
+document.body.appendChild(renderer.domElement);
+
+scene.add(new THREE.HemisphereLight(0xffffff,0xbbbbff,1));
+
+// --- Create hidden ARButton ---
+const hiddenAR = ARButton.createButton(renderer, { requiredFeatures: ["hit-test"] });
+hiddenAR.style.display = "none"; // hide original
+document.body.appendChild(hiddenAR);
+
+// Custom AR button activates ARButton click
+document.getElementById("ar-start-btn").onclick = () => {
+    hiddenAR.click();     // PROGRAMMATICALLY ENTER AR
+    document.getElementById("ar-start-btn").style.display = "none";
+};
+
+// --- Nodes ---
+const nodes = ["TCP","UDP","HTTP","DNS","SMTP","FTP"];
+const nodeSprites = {};
+const loader = new THREE.TextureLoader();
+
+nodes.forEach(n=>{
+    const tex = loader.load("static/img/moodboard.png");
+    const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: tex, transparent:true }));
+    sprite.position.set((Math.random()-0.5)*2,(Math.random()-0.5)*2,-Math.random()*2-0.5);
+    sprite.scale.set(0.4,0.4,1);
+    scene.add(sprite);
+    nodeSprites[n] = sprite;
+});
+
+// --- Attack icon textures ---
+const nodeColors = { "Normal":0x4caf50, "Generic":0xff9800, "Exploits":0xf44336 };
+const iconMap = {
+  "Normal": "/static/img/normal.png",
+  "Generic": "/static/img/malware.png",
+  "Exploits": "/static/img/cyber-attack.png",
+  "default": "/static/img/moodboard.png"
+};
+
+const edges = [];
+
+// --- Socket packet updates ---
+const socket = io();
+
+socket.on("new_packet_event", evt=>{
+    const src = nodeSprites[evt.source_node];
+    const dst = nodeSprites[evt.destination_node];
+    if(!src || !dst) return;
+
+    let edge = edges.find(e=>e.src===evt.source_node && e.dst===evt.destination_node);
+
+    if(!edge){
+        const geom = new THREE.BufferGeometry();
+        geom.setAttribute('position', new THREE.BufferAttribute(new Float32Array(6),3));
+        const mat = new THREE.LineBasicMaterial({ color: nodeColors[evt.attack_type] || 0xffffff });
+
+        const line = new THREE.Line(geom, mat);
+        scene.add(line);
+
+        const tex = loader.load(iconMap[evt.attack_type] || iconMap["default"]);
+        const icon = new THREE.Sprite(new THREE.SpriteMaterial({ map:tex, transparent:true }));
+        icon.scale.set(0.4,0.4,1);
+        scene.add(icon);
+
+        edge = { line, icon, srcNode: evt.source_node, dstNode: evt.destination_node };
+        edges.push(edge);
+    }
+
+    const pos = edge.line.geometry.attributes.position.array;
+    pos[0]=src.position.x; pos[1]=src.position.y; pos[2]=src.position.z;
+    pos[3]=dst.position.x; pos[4]=dst.position.y; pos[5]=dst.position.z;
+    edge.line.geometry.attributes.position.needsUpdate = true;
+
+    edge.icon.position.set(
+        (src.position.x + dst.position.x)/2,
+        (src.position.y + dst.position.y)/2,
+        (src.position.z + dst.position.z)/2
+    );
+
+    edge.line.material.color.set(nodeColors[evt.attack_type] || 0xffffff);
+});
+
+// --- Node repulsion layout ---
+function updateLayout(){
+    nodes.forEach(n1=>{
+        nodes.forEach(n2=>{
+            if(n1!==n2){
+                const s1=nodeSprites[n1], s2=nodeSprites[n2];
+                const dx=s1.position.x-s2.position.x;
+                const dy=s1.position.y-s2.position.y;
+                const dz=s1.position.z-s2.position.z;
+                const d2=dx*dx+dy*dy+dz*dz+0.01;
+                const f=0.001/d2;
+                s1.position.x+=dx*f; s1.position.y+=dy*f; s1.position.z+=dz*f;
+            }
+        });
+    });
+}
+
+renderer.setAnimationLoop(() => {
+    updateLayout();
+    renderer.render(scene, camera);
+});
+
+// Resize handler
+window.addEventListener("resize", ()=>{
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
